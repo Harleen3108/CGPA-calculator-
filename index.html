@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CGPA Calculator</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- jsPDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Custom Tailwind Config & Fonts -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brown: {
+              100: '#f7f3f0',
+              500: '#a0744a',
+              700: '#6D4C41'
+            },
+            coffee: {
+              700: '#5D4037'
+            }
+          },
+          fontFamily: {
+            body: ['Inter', 'sans-serif'],
+            display: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="bg-brown-100 text-coffee-700 font-body p-4">
+  <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+    <header class="bg-brown-500 text-white px-6 py-4">
+      <h1 class="text-2xl font-display font-semibold text-center"> 📈 Academic Performance Calculator</h1>
+      <p class="text-sm text-center">Professional CGPA Analysis & Reporting</p>
+    </header>
+
+    <div class="flex flex-col md:flex-row">
+      <div class="md:w-1/2 p-4 border-r border-brown-200">
+        <h2 class="text-lg font-medium mb-3">Subjects</h2>
+        <div id="subjectsContainer" class="space-y-3 max-h-64 overflow-y-auto mb-4"></div>
+
+        <div class="flex gap-2 mb-3">
+          <button class="flex-1 bg-brown-500 text-white py-2 rounded" onclick="addSubject()">➕ Add</button>
+          <button class="flex-1 bg-brown-700 text-white py-2 rounded" onclick="calculateCGPA()" id="calculateBtn">📊 Calculate</button>
+        </div>
+
+        <button class="w-full bg-gray-700 text-white py-2 rounded" onclick="exportPDF()">📄 Export PDF</button>
+      </div>
+
+      <!-- Output -->
+      <div class="md:w-1/2 p-4">
+        <h2 class="text-lg font-medium mb-3">Results</h2>
+        <div id="resultDisplay" style="display: none;">
+          <div id="greetingSection" class="mb-3"></div>
+          <div id="detailsSection" class="mb-3 text-sm"></div>
+          <canvas id="chartCanvas" height="200"></canvas>
+        </div>
+
+        <div id="placeholderText" class="text-center text-gray-400 mt-12">
+          <p class="text-5xl mb-2">📈</p>
+          <p>Add subjects and calculate to see your performance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
